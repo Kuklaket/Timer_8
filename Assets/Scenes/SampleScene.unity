@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 870821586}
   - component: {fileID: 870821585}
   - component: {fileID: 870821588}
+  - component: {fileID: 870821589}
   - component: {fileID: 870821584}
   m_Layer: 5
   m_Name: Canvas
@@ -330,7 +331,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb68d49b910ad74f8088159a5541fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textCounter: {fileID: 1156425599}
+  _playerInput: {fileID: 870821589}
+--- !u!114 &870821589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870821583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e0e1c39f6499d459e255e6a329b105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1156425597
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +355,7 @@ GameObject:
   - component: {fileID: 1156425598}
   - component: {fileID: 1156425600}
   - component: {fileID: 1156425599}
+  - component: {fileID: 1156425601}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -465,6 +479,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156425597}
   m_CullTransparentMesh: 1
+--- !u!114 &1156425601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156425597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d2a5c1406893642b5783e6f3b4ba74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textCounter: {fileID: 1249048827}
+  _currentTime: {fileID: 870821588}
 --- !u!1 &1249048825
 GameObject:
   m_ObjectHideFlags: 0

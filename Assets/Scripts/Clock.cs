@@ -1,46 +1,63 @@
-using TMPro;
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Clock : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _textCounter;
-    
+    [SerializeField] private PlayerInput _playerInput;
+
     private bool _isCounting = false;
-    private int _currentTime = 0;
     private float _delay = 0.5f;
     private int _counterTick = 1;
+    private Coroutine _coroutine;
 
-    private void Start()
+    public int CurrentTime { get; private set; }
+
+    public event Action<int> TimeChanged;  
+
+    private void OnEnable()
     {
-        _textCounter.text = "0";
+        _playerInput.ScreenPressed += MakeTick;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        if (Input.GetMouseButtonDown(0))
+        _playerInput.ScreenPressed -= MakeTick;
+    }
+
+    private void MakeTick()
+    {
+        if (_isCounting)
         {
-            if (_isCounting)
-            {           
-                _isCounting = !_isCounting;
-                StopCoroutine(Counter());
-            }
-            else
-            {
-                _isCounting = !_isCounting;
-                StartCoroutine(Counter());   
-            }
-        }      
+            _isCounting = !_isCounting;
+            Stop();
+        }
+        else
+        {
+            _isCounting = !_isCounting;
+            Restart();
+        }
     }
 
-    private IEnumerator Counter()
+    private void Restart()
+    {
+        _coroutine = StartCoroutine(IncreaseCounter());
+    }
+
+    private void Stop()
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+    }   
+
+    private IEnumerator IncreaseCounter()
     {
         WaitForSeconds wait = new WaitForSeconds(_delay);
 
         while (_isCounting)
         {                
-            _currentTime += _counterTick;
-            _textCounter.text = _currentTime.ToString("");
+            CurrentTime += _counterTick;
+            TimeChanged?.Invoke(CurrentTime);
 
             yield return wait;
         }  
